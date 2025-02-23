@@ -4,6 +4,7 @@ from django.urls import path
 from .views import list_books, LibraryDetailView
 
 urlpatterns = [
-    path('books/', list_books, name='list_books'),  # This handles the books listing
-    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),  # This handles the library details
+    path('books/', list_books, name='list_books'),  # For function-based view
+    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),  # For class-based view
 ]
+
