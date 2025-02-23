@@ -6,6 +6,14 @@ It exposes the WSGI callable as a module-level variable named ``application``.
 For more information on this file, see
 https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
+# LibraryProject/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('auth/', include('relationship_app.urls')),  # Include the app's URLs
+]
 
 import os
 
