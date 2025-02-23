@@ -1,4 +1,33 @@
+# relationship_app/models.py
+# relationship_app/models.py
 from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    published_date = models.DateField()  # Add this line
+
+    def __str__(self):
+        return self.title
+
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    published_date = models.DateField()
+
+    class Meta:
+        permissions = [
+            ('can_add_book', 'Can add book'),
+            ('can_change_book', 'Can change book'),
+            ('can_delete_book', 'Can delete book'),
+        ]
+
+
+    def __str__(self):
+        return self.title
+
 # relationship_app/models.py
 from django.db import models
 from django.contrib.auth.models import User
