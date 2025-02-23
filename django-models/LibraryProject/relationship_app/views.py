@@ -1,6 +1,7 @@
 # relationship_app/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login  # <-- Import login here
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
@@ -9,7 +10,8 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new user
+            user = form.save()  # Save the new user
+            login(request, user)  # Log in the user after registration
             return redirect('login')  # Redirect to login after registration
     else:
         form = UserCreationForm()
