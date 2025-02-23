@@ -19,7 +19,7 @@ def get_books_in_library(library_name):
 # Retrieve the librarian for a specific library (for example, "Library1")
 def get_librarian_for_library(library_name):
     library = Library.objects.get(name=library_name)  # Fetch the library by its name
-    librarian_for_library = library.librarian  # Get the librarian associated with the library
+    librarian_for_library = Librarian.objects.get(library=library)  # Get librarian via the library relation
     print(f"Librarian for {library.name}: {librarian_for_library.name}")
 
 # Sample usage:
