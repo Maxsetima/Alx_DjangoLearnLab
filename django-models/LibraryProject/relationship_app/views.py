@@ -1,37 +1,26 @@
 # relationship_app/views.py
-# Import the DetailView correctly
-from django.views.generic.detail import DetailView
-from django.shortcuts import render
-from .models import Book, Library
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
 
-def list_books(request):
-    # Get all books from the database
-    books = Book.objects.all()
-    # Render the template and pass the books to the template
-    return render(request, 'relationship_app/list_books.html', {'books': books})
+# Registration view using the built-in UserCreationForm
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the new user
+            return redirect('login')  # Redirect to login after registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'relationship_app/register.html', {'form': form})
 
-# Class-based view for Library Detail
-class LibraryDetailView(DetailView):
-    model = Library
-    template_name = 'relationship_app/library_detail.html'
-    context_object_name = 'library'  # The context variable to refer to the library in the template
+# Custom Login view (using Django's built-in LoginView)
+class CustomLoginView(LoginView):
+    template_name = 'relationship_app/login.html'
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('home')  # Redirect to home after successful login
 
-from django.shortcuts import render
-from .models import Book
-
-def list_books(request):
-    # Get all books from the database
-    books = Book.objects.all()
-    # Render the template and pass the books to the template
-    return render(request, 'relationship_app/list_books.html', {'books': books})
-# relationship_app/views.py
-
-from django.views.generic import DetailView
-from .models import Library
-
-class LibraryDetailView(DetailView):
-    model = Library
-    template_name = 'relationship_app/library_detail.html'
-    context_object_name = 'library'  # The context variable name to refer to the library in the template
-# relationship_app/views.py
-
+# Custom Logout view (using Django's built-in LogoutView)
+class CustomLogoutView(LogoutView):
+    template_name = 'relationship_app/logout.html'

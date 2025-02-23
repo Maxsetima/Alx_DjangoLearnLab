@@ -1,9 +1,9 @@
 # LibraryProject/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('relationship/', include('relationship_app.urls')),  # Include the app's URLs
+    path('auth/', include('relationship_app.urls')),  # Include the app's authentication URLs
 ]
+
