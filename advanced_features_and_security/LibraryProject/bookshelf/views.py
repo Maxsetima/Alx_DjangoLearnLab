@@ -5,6 +5,23 @@ from ..relationship_app.forms import ExampleForm
 from django.contrib.auth import login, authenticate, hashers
 from django.shortcuts import render, redirect
 from .forms import BookForm
+from django.shortcuts import render
+from .forms import ExampleForm
+
+def example_view(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            # Do something with the data (like sending an email, etc.)
+            return render(request, 'bookshelf/success.html', {'name': name})
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/example_form.html', {'form': form})
 
 def add_book(request):
     if request.method == 'POST':

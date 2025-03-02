@@ -13,3 +13,6 @@ urlpatterns = [
     path('auth/', include('relationship_app.urls')),  # Include the app's authentication URLs
 ]
 
+urlpatterns = [
+    path('example/', views.example_view, name='example_form'),
+]
