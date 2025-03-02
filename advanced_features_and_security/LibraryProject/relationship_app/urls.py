@@ -28,6 +28,13 @@ urlpatterns = [
     path('library/<int:id>/', LibraryDetailView.as_view(), name='library_detail'),
     # Add other URL patterns as needed
 ]
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('bookshelf/', include('bookshelf.urls')),  # Include bookshelf app URLs
+]
 
 # URL pattern for the function-based view (list_books)
     path('books/', list_books, name='list_books'),

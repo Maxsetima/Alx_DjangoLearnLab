@@ -1,6 +1,12 @@
 # LibraryProject/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('add_book/', views.add_book, name='add_book'),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),

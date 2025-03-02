@@ -1,8 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
 from .models import CustomUser
-from .forms import ExampleForm
+from ..relationship_app.forms import ExampleForm
 from django.contrib.auth import login, authenticate, hashers
+from django.shortcuts import render, redirect
+from .forms import BookForm
+
+def add_book(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the new book
+            return redirect('book_list')  # Redirect to a list of books or another view
+    else:
+        form = BookForm()
+
+    return render(request, 'bookshelf/add_book.html', {'form': form})
 
 @permission_required('bookshelf.can_view_book', raise_exception=True)
 def book_list(request):
