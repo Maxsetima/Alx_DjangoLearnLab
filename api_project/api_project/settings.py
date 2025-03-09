@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Add 'rest_framework' for Django REST Framework
-    'rest_framework',
+    'rest_framework',  # This is the correct name
+    'rest_framework.authtoken',  # Add this line if you're using token authentication
     # Your new API app
     'api'
+
 
     
 ]
@@ -133,6 +135,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     # Configure pagination if you want to limit the number of objects returned per page
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

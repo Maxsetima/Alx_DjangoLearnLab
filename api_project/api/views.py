@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from .models import Book
 from .serializers import BookSerializer
 
@@ -18,3 +19,10 @@ from .serializers import BookSerializer
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()  # Fetch all books from the database
     serializer_class = BookSerializer  # Use the BookSerializer for serialization
+    permission_classes = [IsAuthenticated]  # Require authentication to access this AP
+from rest_framework.authtoken.views import obtain_auth_token
+from django.urls import path
+
+urlpatterns = [
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+]
