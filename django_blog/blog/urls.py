@@ -4,6 +4,7 @@ from .views import (
     home, posts, register, profile,
     PostListView, PostDetailView, PostCreateView,
     PostUpdateView, PostDeleteView,
+    CommentCreateView, CommentUpdateView, CommentDeleteView,
     edit_comment, delete_comment
 )
 
@@ -23,7 +24,8 @@ urlpatterns = [
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     
-    # Comment actions
-    path('post/<int:pk>/edit-comment/', edit_comment, name='edit-comment'),
-    path('post/<int:pk>/delete-comment/', delete_comment, name='delete-comment'),
+    # Comment actions using class-based views
+    path('post/<int:post_pk>/comment/new/', CommentCreateView.as_view(), name='comment-create'),
+    path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
+    path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
 ]
