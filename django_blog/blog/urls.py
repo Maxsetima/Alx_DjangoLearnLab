@@ -5,7 +5,8 @@ from .views import (
     PostListView, PostDetailView, PostCreateView,
     PostUpdateView, PostDeleteView,
     CommentCreateView, CommentUpdateView, CommentDeleteView,
-    edit_comment, delete_comment
+    search_posts, 
+    edit_comment, delete_comment,
 )
 
 urlpatterns = [
@@ -28,4 +29,11 @@ urlpatterns = [
     path('post/<int:pk>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+
+     # Advanced features: search and tag filtering
+    path('search/', search_posts, name='search-posts'),
+    path('tags/<str:tag>/', lambda request, tag: render(request, 'blog/tag_posts.html', {
+        'tag': tag,
+        'posts': Post.objects.filter(tags__name__iexact=tag)
+    }), name='tag-posts'),
 ]
