@@ -20,7 +20,11 @@ class CustomUserCreationForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tags']  # Include tags field
+        widgets = {
+            'tags': forms.CheckboxSelectMultiple(),  # Optionally, use a widget for easier tag selection
+        }
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

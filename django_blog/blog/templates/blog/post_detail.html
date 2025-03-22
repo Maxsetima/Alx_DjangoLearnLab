@@ -59,3 +59,10 @@
     <a href="{% url 'post-list' %}">Back to Posts</a>
 </body>
 </html>
+<p>Tags:
+    {% for tag in post.tags.all %}
+        <a href="{% url 'tag-posts' tag.name %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+    {% empty %}
+        No tags.
+    {% endfor %}
+</p>
