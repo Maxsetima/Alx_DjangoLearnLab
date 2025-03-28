@@ -33,4 +33,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('accounts.urls')),  # This includes all the user-related routes (register, login, etc.)
     # Add additional API routes for products, orders, logistics, payments, and reviews here
+    path('api/accounts/', include('accounts.urls')),  # Redundant path, you can remove it if not needed
+    path('api/posts/', include('posts.urls')),  # Add this line to include the posts app's URLs
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
