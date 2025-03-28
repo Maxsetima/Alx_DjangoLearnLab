@@ -10,8 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User  # Using the custom user model
         fields = ['id', 'username', 'email', 'bio', 'profile_picture', 'followers']
-        # Ensure these fields exist in your custom User model. 
-        # You can adjust fields based on your custom user model
 
 # RegisterSerializer for user registration
 class RegisterSerializer(serializers.ModelSerializer):
@@ -21,7 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # Creating user with password securely hashed
+        # Creating user with password securely hashed using the custom manager
         user = User.objects.create_user(**validated_data)
         return user
 
@@ -47,7 +45,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         # Create a user with the provided data (password is hashed)
         user = User.objects.create_user(
             username=validated_data['username'],
-            email=validated_data.get('email'),
+            email=validated_data.get('email', ''),
             password=validated_data['password']
         )
         # Create an auth token for the new user
