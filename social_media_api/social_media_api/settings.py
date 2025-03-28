@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',  # Django REST framework for API views
     'rest_framework.authtoken',  # For token-based authentication
     'accounts',  # Your custom accounts app
+    'posts',  # Add this line
 ]
 
 MIDDLEWARE = [
