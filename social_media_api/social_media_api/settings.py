@@ -73,12 +73,12 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 # Django REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # Token-based auth
+        'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  # Default permission for all views (can be overridden in views)
-    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # Adjust page size as needed
 }
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
