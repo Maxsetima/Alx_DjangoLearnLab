@@ -2,6 +2,10 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+class User(AbstractUser):
+    # Adding a many-to-many relationship to itself to handle follows
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email=None, password=None, **extra_fields):
         if not email:
@@ -17,11 +21,13 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(username, email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
-    bio = models.TextField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-    followers = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='following')
-
-    objects = CustomUserManager()  # Add this line to use the custom user manager
-
-    def __str__(self):
-        return self.username
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Change related_name to avoid conflict
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_permissions',  # Change related_name to avoid conflict
+        blank=True
+    )

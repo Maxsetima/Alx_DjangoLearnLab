@@ -92,7 +92,8 @@ DATABASES = {
 }
 
 # Custom User Model
-AUTH_USER_MODEL = 'accounts.CustomUser'  # Points to your custom user model in the accounts app
+AUTH_USER_MODEL = 'accounts.CustomUser'  # Make sure this is pointing to the correct custom model
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
