@@ -1,10 +1,11 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-from .views import UserRegisterView
+from .views import RegisterView, LoginView  # Correct views for registration and login
+
 # Add additional views for profile management if needed
 
 urlpatterns = [
-    path('register/', UserRegisterView.as_view(), name='user-register'),
-    path('login/', obtain_auth_token, name='user-login'),  # DRF built-in token auth view
-    # Add paths like 'profile/' for profile view/update if implemented
+    path('register/', RegisterView.as_view(), name='register'),  # Register a new user
+    path('login/', LoginView.as_view(), name='login'),  # Login user and get token
+    # Optional: Add paths like 'profile/' for profile view/update if implemented
 ]

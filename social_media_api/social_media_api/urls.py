@@ -31,6 +31,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/users/', include('accounts.urls')),
+    path('api/users/', include('accounts.urls')),  # This includes all the user-related routes (register, login, etc.)
     # Add additional API routes for products, orders, logistics, payments, and reviews here
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
