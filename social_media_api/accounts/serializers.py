@@ -8,7 +8,7 @@ User = get_user_model()
 # UserSerializer for displaying user details
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User  # Using the custom user model
+        model = User
         fields = ['id', 'username', 'email', 'bio', 'profile_picture', 'followers']
 
 # RegisterSerializer for user registration
@@ -20,7 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Creating user with password securely hashed using the custom manager
-        user = User.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)  # Use create_user from the custom manager
         return user
 
 # LoginSerializer for login with username and password
@@ -38,7 +38,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     token = serializers.CharField(read_only=True)  # Read-only token field
 
     class Meta:
-        model = User  # Using the custom user model
+        model = User
         fields = ['id', 'username', 'email', 'password', 'token']
 
     def create(self, validated_data):
